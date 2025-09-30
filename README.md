@@ -68,3 +68,7 @@ Landing page behavior
 - Users can click the landing area or the "Skip" button to immediately proceed to the main page.
 - There's a "Don't show again" checkbox; if checked the choice is saved to `localStorage` and the landing will be skipped on future visits.
 - To change the landing asset, replace `src/assets/landing.gif` with your GIF (keep the filename or update `landing.component.ts` src path).
+
+Repository
+
+This repository is named `ibis-equity-consulting` on GitHub. If you see an existing `origin/dev` branch with a short README, that was created earlier on the remote; this local README includes more expanded documentation and usage notes.
