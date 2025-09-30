@@ -1,0 +1,55 @@
+# Node
+node_modules/
+
+# Angular build output
+dist/
+dist-*/
+.angular/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs and OS
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*~
+Thumbs.db
+.DS_Store
+
+# Environment files
+.env
+.env.*
+
+# Misc
+coverage/
+/.sass-cache
+/.cache
+
+# Ignore npm package lock if you prefer (uncomment if needed)
+# package-lock.json
+# Project ignores
+.angular/
+node_modules/
+dist/
+src/assets/*.gif
+
+
+# Project ignores
+.angular/
+node_modules/
+dist/
+src/assets/*.gif
+.git.backup*
+
+
+# backup dirs
+.git.backup*
+

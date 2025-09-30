@@ -1,0 +1,26 @@
+/* Simple responsive layout and Material theme placeholder */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+app-root {
+  display: block;
+  min-height: 100%;
+}
+
+.container {
+  padding: 16px;
+}
+
+/* Responsive grid */
+.grid {
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+@media (max-width: 600px) {
+  .container { padding: 12px; }
+}
