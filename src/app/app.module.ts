@@ -12,10 +12,16 @@ import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, DashboardComponent, LandingComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MaterialModule, FormsModule, RouterModule.forRoot([
-    { path: '', component: HomeComponent },
-    { path: 'dashboard', component: DashboardComponent }
-  ])],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'dashboard', component: DashboardComponent }
+    ])
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
