@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-landing',
@@ -6,7 +7,7 @@ import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from
     <div class="landing" role="dialog" aria-label="Landing animation" tabindex="0">
       <div class="content" (click)="onClickContent($event)">
         <app-header></app-header>
-        <img class="landing-gif" src="/assets/ibis-gif-3.gif" alt="Landing animation" />
+          <img class="landing-gif" src="/assets/ibis-gif-3.gif" alt="Landing animation" @gifEnter />
         <div class="controls">
           <label><input type="checkbox" [(ngModel)]="dontShowAgain" /> Don't show again</label>
           <button class="skip" (click)="close()">Skip</button>
@@ -38,6 +39,18 @@ import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from
     .controls label { font-size: 0.9rem }
     .controls .skip { background: rgba(255,255,255,0.1); color:#fff; border: none; padding:6px 10px; border-radius:4px }
   `]
+  ,
+  animations: [
+    trigger('gifEnter', [
+      transition(':enter', [
+        animate('700ms cubic-bezier(.2,.8,.2,1)', keyframes([
+          style({ offset: 0, opacity: 0, transform: 'scale(0.95) translateY(10px)' }),
+          style({ offset: 0.6, opacity: 1, transform: 'scale(1.03) translateY(-6px)' }),
+          style({ offset: 1, opacity: 1, transform: 'scale(1) translateY(0)' })
+        ]))
+      ])
+    ])
+  ]
 })
 export class LandingComponent implements OnInit, OnDestroy {
   @Output() closed = new EventEmitter<void>();

@@ -1,19 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { trigger, transition, style, animate, query, stagger, keyframes } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   template: `
     <div class="app-header">
-      <h1 class="title">{{ title }}</h1>
-      <h2 class="subtitle">{{ subtitle }}</h2>
-      <p class="tagline" [@reveal]>{{ tagline }}</p>
+      <div class="parallax-wrap" [style.transform]="parallaxStyle">
+        <h1 class="title">{{ title }}</h1>
+        <h2 class="subtitle">{{ subtitle }}</h2>
+        <p class="tagline" [@reveal]>{{ tagline }}</p>
+      </div>
     </div>
   `,
   styles: [
     `
-    .app-header { text-align: center; color: #fff; margin-bottom: 12px }
+    .app-header { text-align: center; color: #fff; margin-bottom: 12px; overflow: visible }
+    .parallax-wrap { will-change: transform; display: inline-block; transition: transform 120ms linear }
     .app-header .title { margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: 0.5px }
     .app-header .subtitle { margin: 4px 0 0 0; font-size: 1.15rem; font-weight: 500; opacity: 0.95 }
     .app-header .tagline { margin-top: 8px; font-size: 1rem; opacity: 0.9; color: #e6eef8 }
@@ -50,6 +54,11 @@ export class HeaderComponent implements OnInit {
   @Input() subtitle = 'Artificial Intelligence Engineering';
   @Input() tagline = 'Core AI Technologies for Business';
 
+  private navSub?: Subscription;
+  private rafId: number | null = null;
+  private lastScroll = 0;
+  parallaxStyle = 'translate3d(0px,0px,0)';
+
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
@@ -64,9 +73,31 @@ export class HeaderComponent implements OnInit {
     };
 
     applyRouteData();
-    // update on navigation as well
-    this.router.events.subscribe(evt => {
+    // update on navigation as well (store subscription for cleanup)
+    this.navSub = this.router.events.subscribe(evt => {
       if (evt instanceof NavigationEnd) applyRouteData();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.navSub) this.navSub.unsubscribe();
+    if (this.rafId !== null) cancelAnimationFrame(this.rafId);
+  }
+
+  // handle scroll with requestAnimationFrame to avoid layout thrash
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.lastScroll = window.scrollY || window.pageYOffset || 0;
+    if (this.rafId === null) {
+      this.rafId = requestAnimationFrame(() => this.updateParallax());
+    }
+  }
+
+  private updateParallax() {
+    // small parallax effect: move content up a bit as user scrolls down
+    const factor = 0.04; // px per scroll unit
+    const translateY = Math.round(this.lastScroll * factor);
+    this.parallaxStyle = `translate3d(0px, -${translateY}px, 0)`;
+    this.rafId = null;
   }
 }
