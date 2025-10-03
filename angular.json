@@ -42,7 +42,6 @@
       }
     }
   },
-  "defaultProject": "ibis-equity-consulting-llc",
   "cli": {
     "analytics": false
   }

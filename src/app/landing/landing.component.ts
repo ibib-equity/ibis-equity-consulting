@@ -5,7 +5,7 @@ import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from
   template: `
     <div class="landing" role="dialog" aria-label="Landing animation" tabindex="0">
       <div class="content" (click)="onClickContent($event)">
-        <img src="/assets/landing.gif" alt="Landing animation" />
+        <img src="/assets/ibis-gif-3.gif" alt="Landing animation" />
         <div class="controls">
           <label><input type="checkbox" [(ngModel)]="dontShowAgain" /> Don't show again</label>
           <button class="skip" (click)="close()">Skip</button>
