@@ -23,10 +23,24 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
     // fade+scale with slight stagger for child elements
     trigger('reveal', [
       transition(':enter', [
-        query('.title, .subtitle, .tagline', [
-          style({ opacity: 0, transform: 'scale(0.97) translateY(6px)' }),
-          stagger(80, animate('420ms cubic-bezier(.2,.8,.2,1)', style({ opacity: 1, transform: 'scale(1) translateY(0)' })))
-        ], { optional: true })
+        query('.title', [
+              style({ opacity: 0, transform: 'translateY(8px) scale(0.995)' }),
+              animate('540ms 0ms cubic-bezier(.22,.9,.2,1)', style({ opacity: 1, transform: 'translateY(0) scale(1)' }))
+            ], { optional: true }),
+            query('.subtitle', [
+              style({ opacity: 0, transform: 'translateY(6px) scale(0.995)' }),
+              animate('480ms 90ms cubic-bezier(.22,.9,.2,1)', style({ opacity: 1, transform: 'translateY(0) scale(1)' }))
+            ], { optional: true }),
+            query('.tagline', [
+              style({ opacity: 0, transform: 'scale(0.92)' }),
+              animate('620ms 160ms cubic-bezier(.2,.8,.2,1)',
+                keyframes([
+                  style({ offset: 0, opacity: 0, transform: 'scale(0.92)' }),
+                  style({ offset: 0.6, opacity: 1, transform: 'scale(1.03)' }),
+                  style({ offset: 1, opacity: 1, transform: 'scale(1)' })
+                ])
+              )
+            ], { optional: true })
       ])
     ])
   ]

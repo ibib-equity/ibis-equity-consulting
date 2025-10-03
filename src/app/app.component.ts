@@ -14,6 +14,7 @@ const LANDING_KEY = 'landing:hide';
         <span class="spacer"></span>
         <a mat-button routerLink="/dashboard">Dashboard</a>
       </mat-toolbar>
+      <app-header></app-header>
       <div class="container">
         <router-outlet></router-outlet>
       </div>
