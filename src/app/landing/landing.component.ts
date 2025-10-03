@@ -5,10 +5,7 @@ import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from
   template: `
     <div class="landing" role="dialog" aria-label="Landing animation" tabindex="0">
       <div class="content" (click)="onClickContent($event)">
-        <header class="landing-header">
-          <h1>Ibis Equity Consulting, LLC.</h1>
-          <h2>Artificial Intelligence Engineering</h2>
-        </header>
+        <app-header></app-header>
         <img class="landing-gif" src="/assets/ibis-gif-3.gif" alt="Landing animation" />
         <div class="controls">
           <label><input type="checkbox" [(ngModel)]="dontShowAgain" /> Don't show again</label>
@@ -30,9 +27,7 @@ import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from
       cursor: pointer;
     }
   .landing img { max-width: 90%; height: auto; border-radius: 8px; }
-  .landing-header { text-align: center; color: #fff; margin-bottom: 12px }
-  .landing-header h1 { margin: 0; font-size: 1.6rem }
-  .landing-header h2 { margin: 0; font-size: 1.1rem; opacity: 0.9 }
+  /* header now provided by shared HeaderComponent */
   /* GIF is 50% width of its container on larger screens; on small screens use 80% to remain visible */
   .landing-gif { width: 50%; max-width: 50%; height: auto; border-radius: 8px; display: block; margin: 0 auto }
   @media (max-width: 600px) {

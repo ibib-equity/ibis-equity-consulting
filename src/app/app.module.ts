@@ -9,17 +9,18 @@ import { MaterialModule } from './material.module';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LandingComponent } from './landing/landing.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, DashboardComponent, LandingComponent],
+  declarations: [AppComponent, HomeComponent, DashboardComponent, LandingComponent, HeaderComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'dashboard', component: DashboardComponent }
+      { path: '', component: HomeComponent, data: { title: 'Ibis Equity Consulting, LLC.', subtitle: 'Artificial Intelligence Engineering', tagline: 'Core AI Technologies for Business' } },
+      { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard - Ibis Equity Consulting', subtitle: 'AI Insights & Operations', tagline: 'Operationalize AI at scale' } }
     ])
   ],
   providers: [],
